@@ -48,6 +48,14 @@ const discountSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    isFeatured: {
+        type: Boolean,
+        default: false,
+    },
+    isRecommended: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 export default mongoose.model('Discount', discountSchema);

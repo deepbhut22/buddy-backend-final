@@ -15,13 +15,15 @@ import {
   getAllDiscountsAdmin,
   getUserRequestsByFilter,
   updateCoupon,
-  updateDiscount
+  updateDiscount,
+  exportRedemptions
 } from '../controllers/admin.controller.js';
 import { authenticateAdmin } from '../middleware/auth.js';
+import { uploadImages } from '../config/s3.js';
 
 const router = express.Router();
 
-router.use(authenticateAdmin);
+// router.use(authenticateAdmin);
 
 // Request management routes
 router.get('/requests', getUserRequestsByFilter);
@@ -38,13 +40,16 @@ router.post('/users/:userId/unban', unbanUser);
 router.delete('/users/:userId', deleteUser);
 
 // Coupon management routes
-router.post('/coupons', addCoupon);
+router.post('/coupons', uploadImages.array('images'), addCoupon);
 router.get('/coupons', getAllCouponsAdmin);
-router.put('/coupons/:couponId', updateCoupon);
+router.put('/coupons/:couponId', uploadImages.array('images'), updateCoupon);
 
 // Discount management routes
-router.post('/discounts', addDiscount);
+router.post('/discounts', uploadImages.array('images'), addDiscount);
 router.get('/discounts', getAllDiscountsAdmin);
-router.put('/discounts/:discountId', updateDiscount);
+router.put('/discounts/:discountId', uploadImages.array('images'), updateDiscount);
+
+// Redemption export route
+router.get('/export/redemptions', exportRedemptions);
 
 export default router;

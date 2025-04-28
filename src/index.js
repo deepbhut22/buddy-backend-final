@@ -13,6 +13,7 @@ import authRoutes from './routes/auth.routes.js';
 import discountRoutes from './routes/discount.routes.js';
 import couponRoutes from './routes/coupon.routes.js';
 import adminRoutes from './routes/admin.routes.js';
+import searchRoutes from './routes/search.routes.js';
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/discounts', discountRoutes);
 app.use('/api/coupons', couponRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/search', searchRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

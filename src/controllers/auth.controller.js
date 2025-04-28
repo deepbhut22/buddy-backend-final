@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/user.model.js';
 import UserRequest from '../models/userRequest.model.js';
+import { sendRegistrationEmail } from '../utils/emailService.js';
 
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -52,13 +53,15 @@ export const register = async (req, res) => {
 
     await userRequest.save();
 
+    // Send registration confirmation email
+    await sendRegistrationEmail(email, firstName);
+
     res.status(201).json({
       message: 'Registration request submitted successfully',
       requestId: userRequest._id
     });
   } catch (error) {
-    console.log(error);
-    
+    console.error('Registration error:', error);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
@@ -128,7 +131,10 @@ export const login = async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
+
     const isPasswordValid = await bcrypt.compare(password, user.password);
+
+
     if (!isPasswordValid) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
@@ -137,8 +143,8 @@ export const login = async (req, res) => {
 
     res.cookie('token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      secure: false,
+      // sameSite: 'none',
       maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
     });
 
@@ -162,4 +168,13 @@ export const logout = (req, res) => {
     expires: new Date(0)
   });
   res.json({ message: 'Logged out successfully' });
+};
+
+export const getBasicUserInfo = async (req, res) => {
+  try {
+    // const user = await User.findById(req.user._id).select('firstName lastName email buddyId buddyCredit isBanned');
+    res.json(req.user);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
 };
