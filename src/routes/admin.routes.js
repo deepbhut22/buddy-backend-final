@@ -18,6 +18,7 @@ import {
   updateDiscount,
   exportRedemptions
 } from '../controllers/admin.controller.js';
+import { getDashboardData, getRedemptionAnalytics, getUserAnalytics, getSummaryReports } from '../controllers/admin.dashBoard.js';
 import { authenticateAdmin } from '../middleware/auth.js';
 import { uploadImages } from '../config/s3.js';
 
@@ -51,5 +52,10 @@ router.put('/discounts/:discountId', uploadImages.array('images'), updateDiscoun
 
 // Redemption export route
 router.get('/export/redemptions', exportRedemptions);
+// router.get('/analytics', getAnalytics);
+router.get('/dashboard', getDashboardData);
+router.get('/redemption-analytics', getRedemptionAnalytics);
+router.get('/user-analytics', getUserAnalytics);
+router.get('/summary', getSummaryReports);
 
 export default router;
