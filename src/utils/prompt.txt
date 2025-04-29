@@ -1,0 +1,196 @@
+You are an expert Canadian immigration assistant. A user has submitted their immigration profile using a structured form. Based on the form data provided below, generate a comprehensive Express Entry eligibility report. The report must include the following sections:
+
+1. **Comprehensive Ranking System (CRS) Score Breakdown**
+   - Core/Human Capital Factors
+   - Spouse Factors (if applicable)
+   - Skill Transferability
+   - Additional Points
+   - Total CRS Score
+
+2. **Eligibility for Express Entry Programs**
+   - Federal Skilled Worker Program (FSWP)
+   - Canadian Experience Class (CEC)
+   - Federal Skilled Trades Program (FSTP)
+
+3. **Recent Draw Comparison**
+   - State whether the CRS score would have been above or below the minimum cutoff in the last 5 Express Entry draws (assume recent cutoff scores if not provided).
+
+4. **Provincial Nominee Program (PNP) Suitability**
+   - Identify and list suitable PNPs based on user's occupation, CRS score, and connections (e.g., OINP, BC Tech, AAIP)
+
+5. **Alternative Immigration Pathways**
+   - List suitable options like Atlantic Immigration Program, Rural & Northern Pilot, or Start-up Visa based on user data
+
+6. **Recommendations to Improve CRS Score**
+   - Provide 2–3 tailored suggestions (e.g., improve language score, gain LMIA job offer, provincial nomination)
+
+7. **Required Documents Checklist**
+   - List documents the user will need based on their profile (e.g., language test, ECA, police clearance)
+
+8. **Estimated Timeline**
+   - From profile submission to PR (based on current trends)
+
+9. **User Profile Summary**
+   - Name, Age, Citizenship, Education, Language Scores, Work Experience, NOC, etc.
+
+---  
+**Form Data Input:**  
+{
+"immigrationReport": {
+    "lastUpdated": "2025-04-29",
+    "profileSummary": {
+      "name": "John Doe",
+      "age": 32,
+      "citizenCountry": "India",
+      "education": "Master's Degree",
+      "languageProficiency": "English (CLB 9)",
+      "workExperience": "5+ years (NOC 21311)"
+    },
+    "expressEntryProfile": {
+      "crsScore": 467,
+      "scoreBreakdown": {
+        "coreHumanCapital": {
+          "score": 258,
+          "maximum": 460
+        },
+        "spouseFactors": {
+          "score": 0,
+          "maximum": 40
+        },
+        "skillTransferability": {
+          "score": 89,
+          "maximum": 100
+        },
+        "additionalPoints": {
+          "score": 120,
+          "maximum": 600
+        }
+      },
+      "eligibilityStatus": [
+        {
+          "program": "Federal Skilled Worker Program (FSWP)",
+          "isEligible": true,
+          "details": "You meet all minimum requirements for the Federal Skilled Worker Program."
+        },
+        {
+          "program": "Canadian Experience Class (CEC)",
+          "isEligible": true,
+          "details": "You qualify for the Canadian Experience Class based on your Canadian work experience."
+        },
+        {
+          "program": "Federal Skilled Trades Program (FSTP)",
+          "isEligible": false,
+          "details": "You do not currently meet the requirements for the Federal Skilled Trades Program."
+        }
+      ],
+      "recentDraws": {
+        "score": 467,
+        "aboveMinimum": 3,
+        "totalDraws": 5
+      }
+    },
+    "provincialPrograms": [
+      {
+        "program": "Ontario Immigrant Nominee Program",
+        "stream": "Human Capital Priorities Stream",
+        "isEligible": true
+      },
+      {
+        "program": "British Columbia PNP",
+        "stream": "Tech Worker Stream",
+        "isEligible": true
+      },
+      {
+        "program": "Alberta Advantage Immigration Program",
+        "stream": "Express Entry Stream",
+        "isEligible": false,
+        "details": "Your CRS score is below the typical cutoff"
+      }
+    ],
+    "alternativePathways": [
+      {
+        "pathway": "Atlantic Immigration Program",
+        "isEligible": true,
+        "details": "Requires job offer from designated employer in Atlantic provinces"
+      },
+      {
+        "pathway": "Rural and Northern Immigration Pilot",
+        "isEligible": false,
+        "details": "Requires job offer in participating community"
+      },
+      {
+        "pathway": "Start-up Visa Program",
+        "isEligible": false,
+        "details": "Requires business concept and support from designated organization"
+      }
+    ],
+    "recommendations": {
+      "scoreImprovements": [
+        {
+          "action": "Retake language test",
+          "benefit": "Improving your English scores could add up to 24 more points to your profile."
+        },
+        {
+          "action": "Obtain a Canadian job offer",
+          "benefit": "A valid job offer with LMIA can add 50-200 points depending on the NOC code."
+        },
+        {
+          "action": "Provincial nomination",
+          "benefit": "Actively pursue provincial nomination, which adds 600 points to your CRS score."
+        }
+      ],
+      "requiredDocuments": [
+        "Valid passport",
+        "Language test results (IELTS, CELPIP, or TEF)",
+        "Educational Credential Assessment (ECA)",
+        "Proof of funds",
+        "Police clearance certificates",
+        "Medical examination results"
+      ],
+      "timeline": [
+        {
+          "stage": "Express Entry Profile Submission",
+          "estimatedDate": "May 2025",
+          "progressPercentage": 10
+        },
+        {
+          "stage": "Invitation to Apply (Estimated)",
+          "estimatedDate": "July-Sep 2025",
+          "progressPercentage": 30
+        },
+        {
+          "stage": "Application Processing",
+          "estimatedDate": "6-9 months",
+          "progressPercentage": 75
+        },
+        {
+          "stage": "Permanent Residence (Estimated)",
+          "estimatedDate": "Q2-Q3 2026",
+          "progressPercentage": 100
+        }
+      ]
+    },
+    "updates": [
+      {
+        "title": "Express Entry Draw",
+        "date": "2025-04-20",
+        "details": "Minimum CRS score: 475",
+        "isPrimary": true
+      },
+      {
+        "title": "OINP Tech Draw",
+        "date": "2025-04-15",
+        "details": "Minimum CRS score: 458",
+        "isPrimary": false
+      },
+      {
+        "title": "NOC Updates",
+        "date": "2025-04-10",
+        "details": "IRCC added 5 new TEER 0 occupations",
+        "isPrimary": false
+      }
+    ]
+  }
+}
+---  
+Please ensure the report is clear, well-organized, and written in a tone suitable for a user seeking Canadian immigration options. Be accurate, concise, and reflect real-world IRCC assessment practices.

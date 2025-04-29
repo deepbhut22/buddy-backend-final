@@ -211,7 +211,15 @@ export const addCoupon = async (req, res) => {
   try {
     const couponData = req.body;
 
+    if (couponData.category) {
+      couponData.category = couponData.category.split(',').map(item => item.trim());
+    }
+    if (couponData.products) {
+      couponData.products = couponData.products.split(',').map(item => item.trim());
+    }
+
     const imageUrls = req.files.map(file => file.location);
+
     couponData.images = imageUrls;
     couponData.name = JSON.parse(couponData.name);
 
@@ -269,6 +277,14 @@ export const getActiveCouponsAdmin = async (req, res) => {
 export const addDiscount = async (req, res) => {
   try {
     const discountData = req.body;
+
+    if (discountData.category) {
+      discountData.category = discountData.category.split(',').map(item => item.trim());
+    }
+    if (discountData.products) {
+      discountData.products = discountData.products.split(',').map(item => item.trim());
+    }
+
     const imageUrls = req.files ? req.files.map(file => file.location) : [];
 
     discountData.images = imageUrls;
@@ -327,15 +343,31 @@ export const updateCoupon = async (req, res) => {
   try {
     const { couponId } = req.params;
     const updatedCouponData = req.body;
-    const imageUrls = req.files.map(file => file.location);
+
+    if (updatedCouponData.name) {
+      updatedCouponData.name = JSON.parse(updatedCouponData.name);
+    }
+    
+    if (updatedCouponData.category) {
+      updatedCouponData.category = updatedCouponData.category.split(',').map(item => item.trim());
+    }
+    if (updatedCouponData.products) {
+      updatedCouponData.products = updatedCouponData.products.split(',').map(item => item.trim());
+    }
+
+    const imageUrls = req.files ? req.files.map(file => file.location) : [];
     updatedCouponData.images = imageUrls;
 
+    // console.log(updatedCouponData);
+
     const updatedCoupon = await Coupon.findByIdAndUpdate(couponId, updatedCouponData, { new: true });
+    console.log(updatedCoupon);
     if (!updatedCoupon) {
       return res.status(404).json({ message: 'Coupon not found' });
     }    
     res.json({ message: 'Coupon updated successfully', coupon: updatedCoupon });
   } catch (error) {
+    console.log("error in updateCoupon", error);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
